@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="Find_the_GoT.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Find_the_GoT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:Find_the_GoT.ViewModels">
+    <Page.DataContext>
+        <vm:clsMainPageVM/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GridView x:Name="Cartas" ItemsSource="{Binding ListaCartas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Clickable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PrimeraCarta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="200" Width="200">
+                        <Image Source="{Binding Img}" Visibility="{Binding Visible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <TextBlock Grid.Column="0" Name="Contador" Text="{Binding ContadorJuego}" VerticalAlignment="Top" Margin="10"/>
+        <Button Grid.Column="0" BorderBrush="Black" Background="AliceBlue" Name="ReiniciarPartida" Content="Nueva partida" Command="{Binding ReiniciarPartida}" VerticalAlignment="Center" Margin="10, 40"/>
+        <TextBlock Grid.Column="0" Text="{Binding MensajeGanador}" VerticalAlignment="Bottom" Margin="10, 40"/>
+
+    </Grid>
+</Page>
